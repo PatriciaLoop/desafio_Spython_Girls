@@ -1,0 +1,73 @@
+body, html {
+    height: 100%;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
+.card-disabled {
+    opacity: 0.6;
+}
+.card .item-not-active {
+    position: absolute;
+    right: 0;
+    background: #ff4545;
+    height: 100%;
+    top: 0px;
+    padding: 0 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+} 
+.card .item-not-active > span {
+    font-weight: bold;
+    color: #fff;
+}
+.card:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.nav-link {
+    font-weight: bold;
+}
+.nav-link.active {
+    color: yellow !important;
+}
+.wrapper-create-product {
+    height: 100%;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 650px;
+}
+.wrapper-create-product > form > .form-group input {
+    margin-bottom: 20px;
+}
+.wrapper-create-product > form > .form-group input[type='checkbox'] {
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+
+.change-password-form {
+    width: 650px;
+    max-width: 90%;
+    margin: 0 auto;
+    margin-top: 50px
+}
+
+.change-password-form > label, input {
+    display: block !important;
+}
+.change-password-form > input {
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+}
+.change-password-form > button {
+    margin-top: 25px;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+}

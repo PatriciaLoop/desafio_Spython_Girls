@@ -1,0 +1,20 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+{% include 'partials/_header.html' %}
+<div class="container">
+    <h1 class="h3 mb-3 mt-5 font-weight-light text-center">Edição de produto</h1>
+    <div class="wrapper-create-product mt-5">
+        <form method="POST" action="{% url 'update_product' pk=product.id %}">
+            {% csrf_token %}
+            <div class="form-group mb-2 form-create-product">
+                <input type="text" name="name" class="form-control" placeholder="Insira o nome do produto" maxlength="100" required value="{{product.name}}" id="id_name">
+                <input type="number" name="price" class="form-control" placeholder="Insira o preço do produto" min="0" required value={{product.price}} step="any" id="id_price">
+                <input type="number" name="code" class="form-control" placeholder="Insira o código do produto" min="0" required value="{{product.code}}" id="id_code">
+                <input type="number" name="quantity_in_stock" class="form-control" placeholder="Insira a quantidade do produto" min="0" required value="{{product.quantity_in_stock}}" id="id_quantity_in_stock">
+                <label for="id_is_active">Está ativo?</label><input type="checkbox" name="is_active" id="id_is_active" {% if product.is_active %}checked{% endif %} />
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><span style="font-weight: bold;">Editar</span></button>
+        </form>
+    </div>
+</div>
+{% endblock %}

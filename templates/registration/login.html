@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}" >
+{% endblock %}
+
+{% block title %} | Login{% endblock title %}
+
+{% block content %}
+<form class="form-signin" method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <img class="mb-4 logo" src="{% static 'images/djangopony.png' %}" alt="Magalu" height="72">
+    {% if form.errors %}
+    <p class="alert alert-danger" role="alert">
+        Suas credenciais estão inválidas.<br/>Por favor tente novamente.
+    </p>
+    {% endif %}
+    <h1 class="h5 mb-3 font-weight-light text-center">Efetue o Login</h1>
+    <div class="form-group">
+        {% for field in form %}
+            <div class="input-group mb-2">
+                {% if field.name == 'password' %}
+                    <input class="form-control" placeholder="password" id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="password" /> 
+                {% else %}
+                    <input class="form-control" placeholder="username" id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="text" /> 
+                {% endif %}
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit"><span style="font-weight: bold;">Login</span></button>
+    </div>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
+</form>
+
+{% endblock %}

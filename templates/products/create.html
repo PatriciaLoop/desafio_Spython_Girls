@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+{% include 'partials/_header.html' %}
+<div class="container">
+    <h1 class="h3 mb-3 mt-5 font-weight-light text-center">Cadastro de produtos</h1>
+    <div class="wrapper-create-product mt-5">
+        <form method="POST" action="{% url 'create_product' %}">
+            {% csrf_token %}
+            <div class="form-group mb-2 form-create-product">
+                {{ form }}
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><span style="font-weight: bold;">Criar</span></button>
+        </form>
+    </div>
+</div>
+{% endblock %}

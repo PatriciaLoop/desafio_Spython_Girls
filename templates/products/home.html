@@ -1,0 +1,38 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+{% include 'partials/_header.html' %}
+{% include 'partials/_messages.html' %}
+<div class="container">
+
+    <div class="input-group mt-5">
+        <form method="GET" class="form-inline ml-auto form-group mb-0" style="width: 100%;">
+            <input style="flex: 1;" type="text" name="name" class="form-control" placeholder="Nome do produto" aria-label="produto" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Pesquisar</button>
+            </div>
+        </form>
+    </div>
+    <h1 class="display-4 mt-4 text-center">Lista de Produtos</h1>
+    <div class="wrapper mt-5 h-100">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-12 align-items-center mb-2">
+                    <div class="card {% if not product.is_active %}card-disabled{% endif %} p-3 mb-5 bg-white rounded" style="position: relative;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted"></h6>
+                            <p class="card-text"></p>
+                            <p>R$ {{product.price}}</p>
+                        </div>
+                        {% if not product.is_active %}
+                            <div class="item-not-active">
+                                <span>Não disponível</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

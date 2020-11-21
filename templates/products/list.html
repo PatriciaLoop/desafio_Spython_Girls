@@ -1,0 +1,63 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+{% include 'partials/_header.html' %}
+{% include 'partials/_messages.html' %}
+<div class="container">
+    <h1 class="display-4 mt-4 text-center">Meus Produtos</h1>
+    <div class="wrapper mt-5 h-100">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-12 align-items-center mb-2">
+                    <div class="card {% if not product.is_active %}card-disabled{% endif %} p-3 mb-5 bg-white rounded" style="position: relative;">
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted"></h6>
+                            <p class="card-text"></p>
+                            <p>R$ {{product.price}}</p>
+                            {% if user.is_authenticated and product.seller == user %}
+                                <div class="d-flex flex-row justify-content-start align-items-center">
+                                    <a href="{% url 'edit_product' pk=product.id %}">Editar</a>
+                                    <form method="POST" action="{% url 'delete_product' pk=product.id %}">
+                                        {% csrf_token %}
+                                        <input type="submit" class="btn btn-link" value="Deletar" />
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% if not product.is_active %}
+                            <div class="item-not-active">
+                                <span>Não disponível</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="modal-delete-product">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title">Remoção de produto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <form method="POST" action="">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    Deseja mesmo deletar o produto "{{ product.name }}" ?
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-danger" value="Deletar" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
